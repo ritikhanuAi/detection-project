@@ -1,0 +1,16 @@
+<!-- Reusable Metric Card Partial -->
+<div class="metric-card" id="{{ card_id|default:'' }}">
+  <span class="metric-label">{{ label }}</span>
+  <div class="metric-value" id="{{ value_id|default:'' }}">{{ value|default:'--' }}</div>
+  {% if show_confidence %}
+  <div class="metric-confidence-wrap">
+    <div class="confidence-bar">
+      <div class="confidence-bar-fill" id="{{ conf_bar_id|default:'' }}" style="width: {{ confidence|default:0 }}%;"></div>
+    </div>
+    <div class="confidence-text">
+      <span>Confidence</span>
+      <span id="{{ conf_text_id|default:'' }}">{{ confidence|default:0 }}%</span>
+    </div>
+  </div>
+  {% endif %}
+</div>

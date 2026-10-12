@@ -1,0 +1,14 @@
+{
+  "job_id": "99a4cbc5-564b-4096-a332-d46f1e13dfef",
+  "total": 24,
+  "true_positives": 11,
+  "true_negatives": 11,
+  "false_positives": 0,
+  "false_negatives": 1,
+  "needs_review": 1,
+  "accuracy": 95.65,
+  "specificity_fp_catch_rate": 100.0,
+  "precision": 100.0,
+  "recall": 91.67,
+  "f1_score": 95.65
+}

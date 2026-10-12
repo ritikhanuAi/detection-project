@@ -1,0 +1,144 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Stage 1: Road Profiler | RoadAthena AI{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: var(--space-6);">
+  <a href="/" style="color: var(--theme-text-muted); text-decoration: none; font-size: var(--text-sm);">&larr; Back to Dashboard</a>
+  <h1 style="font-size: var(--text-2xl); font-weight: 800; margin-top: var(--space-2);">
+    Stage 1: AI Road Profiling Workbench
+  </h1>
+  <p style="color: var(--theme-text-secondary); font-size: var(--text-sm);">
+    Upload a road survey video to profile pavement characteristics and configure defect detection models.
+  </p>
+</div>
+
+<!-- Upload & Stepper Section -->
+<div class="card" style="margin-bottom: var(--space-6);">
+  {% include 'components/_stepper.html' with stepper_id='stage1Stepper' %}
+
+  <div id="uploadAreaSection">
+    <div id="videoDropzone"></div>
+    <div style="margin-top: var(--space-4); display: flex; justify-content: flex-end;">
+      <button class="btn btn-primary" id="startProfilingBtn" disabled>Upload & Start Profiling &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Live Progress Bar Section -->
+  <div id="progressSection" style="display: none; margin-top: var(--space-4);">
+    <div id="profilingProgressBar"></div>
+  </div>
+</div>
+
+<!-- Results Workbench Section (Hidden until job complete) -->
+<div id="resultsWorkbench" style="display: none;">
+  <!-- Model Configuration Selected Banner -->
+  <div class="card" style="margin-bottom: var(--space-6); background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(17, 24, 39, 0.9)); border-color: rgba(79, 70, 229, 0.4);">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <span class="badge badge-running" style="margin-bottom: 4px;">Model Selection Matrix</span>
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #fff;">Selected Detector Configuration</h3>
+        <p style="font-size: 0.85rem; color: var(--theme-text-secondary);">Optimal computer vision model chosen based on consensus profile.</p>
+      </div>
+      <div>
+        <code style="font-family: var(--font-mono); font-size: 1.1rem; color: #a5b4fc; background: rgba(0,0,0,0.4); padding: 8px 16px; border-radius: 6px; border: 1px solid rgba(79, 70, 229, 0.5);" id="configNameText">
+          --
+        </code>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 Attributes Metric Cards Grid -->
+  <div class="metric-grid">
+    <!-- Road Type -->
+    <div class="metric-card">
+      <span class="metric-label">Road Type</span>
+      <div class="metric-value" id="valRoadType">--</div>
+      <div class="metric-confidence-wrap">
+        <div class="confidence-bar">
+          <div class="confidence-bar-fill" id="confBarRoadType" style="width: 0%;"></div>
+        </div>
+        <div class="confidence-text">
+          <span>Agreement</span>
+          <span id="confTextRoadType">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pavement Type -->
+    <div class="metric-card">
+      <span class="metric-label">Pavement Type</span>
+      <div class="metric-value" id="valPavement">--</div>
+      <div class="metric-confidence-wrap">
+        <div class="confidence-bar">
+          <div class="confidence-bar-fill" id="confBarPavement" style="width: 0%;"></div>
+        </div>
+        <div class="confidence-text">
+          <span>Agreement</span>
+          <span id="confTextPavement">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carriageway Type -->
+    <div class="metric-card">
+      <span class="metric-label">Carriageway</span>
+      <div class="metric-value" id="valCarriageway">--</div>
+      <div class="metric-confidence-wrap">
+        <div class="confidence-bar">
+          <div class="confidence-bar-fill" id="confBarCarriageway" style="width: 0%;"></div>
+        </div>
+        <div class="confidence-text">
+          <span>Agreement</span>
+          <span id="confTextCarriageway">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lanes Count -->
+    <div class="metric-card">
+      <span class="metric-label">Number of Lanes</span>
+      <div class="metric-value" id="valLanes">--</div>
+      <div class="metric-confidence-wrap">
+        <div class="confidence-bar">
+          <div class="confidence-bar-fill" id="confBarLanes" style="width: 0%;"></div>
+        </div>
+        <div class="confidence-text">
+          <span>Agreement</span>
+          <span id="confTextLanes">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estimated Width -->
+    <div class="metric-card">
+      <span class="metric-label">Estimated Road Width</span>
+      <div class="metric-value" id="valWidth">--</div>
+      <div class="metric-confidence-wrap">
+        <div class="confidence-bar">
+          <div class="confidence-bar-fill" id="confBarWidth" style="width: 0%;"></div>
+        </div>
+        <div class="confidence-text">
+          <span>Sanity Check</span>
+          <span id="confTextWidth">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyframes Gallery Carousel Card -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <h3 class="card-title">Extracted Sharp Keyframes</h3>
+        <p class="card-subtitle">Representative video frames sampled across the timeline with blur variance filtering.</p>
+      </div>
+    </div>
+    <div class="keyframes-grid" id="keyframesGrid"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/static/js/pages/stage1Page.js"></script>
+{% endblock %}

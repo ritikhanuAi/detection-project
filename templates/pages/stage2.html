@@ -1,0 +1,94 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Stage 2: Detection Validator | RoadAthena AI{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: var(--space-6);">
+  <a href="/" style="color: var(--theme-text-muted); text-decoration: none; font-size: var(--text-sm);">&larr; Back to Dashboard</a>
+  <h1 style="font-size: var(--text-2xl); font-weight: 800; margin-top: var(--space-2);">
+    Stage 2: AI Detection Validator Workbench
+  </h1>
+  <p style="color: var(--theme-text-secondary); font-size: var(--text-sm);">
+    Validate computer vision defect detections against visual evidence to filter out false positives and edge-case anomalies.
+  </p>
+</div>
+
+<!-- Upload & Stepper Section -->
+<div class="card" style="margin-bottom: var(--space-6);">
+  {% include 'components/_stepper.html' with stepper_id='stage2Stepper' %}
+
+  <div id="uploadAreaSection">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+      <div>
+        <label style="font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; color: var(--theme-text-muted); display: block; margin-bottom: 8px;">
+          1. Detection JSON File (Required)
+        </label>
+        <div id="jsonDropzone"></div>
+      </div>
+      <div>
+        <label style="font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; color: var(--theme-text-muted); display: block; margin-bottom: 8px;">
+          2. Road Images Archive (.zip, Optional)
+        </label>
+        <div id="imagesDropzone"></div>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--space-4); display: flex; justify-content: flex-end;">
+      <button class="btn btn-primary" id="startValidationBtn" disabled>Upload & Validate Detections &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Live Progress Bar Section -->
+  <div id="progressSection" style="display: none; margin-top: var(--space-4);">
+    <div id="validationProgressBar"></div>
+  </div>
+</div>
+
+<!-- Results Workbench Section (Hidden until job complete) -->
+<div id="resultsWorkbench" style="display: none;">
+  <!-- Verification Summary Metrics Grid -->
+  <div class="metric-grid">
+    <div class="metric-card">
+      <span class="metric-label">Total Audited</span>
+      <div class="metric-value" id="valTotal">--</div>
+    </div>
+    <div class="metric-card" style="border-left: 4px solid var(--theme-correct);">
+      <span class="metric-label">Confirmed Correct</span>
+      <div class="metric-value" style="color: var(--theme-correct);" id="valCorrect">--</div>
+    </div>
+    <div class="metric-card" style="border-left: 4px solid var(--theme-incorrect);">
+      <span class="metric-label">False Positives Caught</span>
+      <div class="metric-value" style="color: var(--theme-incorrect);" id="valIncorrect">--</div>
+    </div>
+    <div class="metric-card" style="border-left: 4px solid var(--theme-review);">
+      <span class="metric-label">Needs Review</span>
+      <div class="metric-value" style="color: var(--theme-review);" id="valReview">--</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-label">Model Precision</span>
+      <div class="metric-value" id="valPrecision">--%</div>
+    </div>
+  </div>
+
+  <!-- Table Card -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <h3 class="card-title">Audited Detection Records</h3>
+        <p class="card-subtitle">Detailed breakdown of verified bounding boxes, confidence, and visual reasoning.</p>
+      </div>
+      <div>
+        <a href="#" class="btn btn-primary" id="downloadExportBtn" target="_blank">
+          ⬇️ Download Validated JSON
+        </a>
+      </div>
+    </div>
+
+    <div id="detectionsTableContainer"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/static/js/pages/stage2Page.js"></script>
+{% endblock %}

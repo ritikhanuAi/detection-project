@@ -1,0 +1,362 @@
+[
+  {
+    "id": "det_001",
+    "image": "road_pothole_deep.jpg",
+    "class_name": "pothole",
+    "confidence": 0.94,
+    "bbox": [
+      160,
+      130,
+      300,
+      250
+    ],
+    "type": "pothole_deep",
+    "ground_truth_valid": true,
+    "notes": "Deep cavity with sharp fractured perimeter and interior shadow depth"
+  },
+  {
+    "id": "det_002",
+    "image": "road_pothole_shallow.jpg",
+    "class_name": "pothole",
+    "confidence": 0.88,
+    "bbox": [
+      170,
+      140,
+      290,
+      230
+    ],
+    "type": "pothole_shallow",
+    "ground_truth_valid": true,
+    "notes": "Shallow surface raveling depression with exposed coarse base"
+  },
+  {
+    "id": "det_003",
+    "image": "road_pothole_cluster.jpg",
+    "class_name": "pothole",
+    "confidence": 0.91,
+    "bbox": [
+      140,
+      110,
+      330,
+      260
+    ],
+    "type": "pothole_cluster",
+    "ground_truth_valid": true,
+    "notes": "Multi-cavity pothole cluster on deteriorated wearing course"
+  },
+  {
+    "id": "det_004",
+    "image": "road_crack_longitudinal.jpg",
+    "class_name": "longitudinal crack",
+    "confidence": 0.92,
+    "bbox": [
+      220,
+      60,
+      270,
+      320
+    ],
+    "type": "crack_longitudinal",
+    "ground_truth_valid": true,
+    "notes": "Parallel fatigue crack propagating along wheelpath"
+  },
+  {
+    "id": "det_005",
+    "image": "road_crack_transverse.jpg",
+    "class_name": "transverse crack",
+    "confidence": 0.89,
+    "bbox": [
+      80,
+      170,
+      400,
+      220
+    ],
+    "type": "crack_transverse",
+    "ground_truth_valid": true,
+    "notes": "Perpendicular thermal contraction fracture across travel lane"
+  },
+  {
+    "id": "det_006",
+    "image": "road_crack_alligator_dense.jpg",
+    "class_name": "alligator cracking",
+    "confidence": 0.95,
+    "bbox": [
+      130,
+      100,
+      350,
+      270
+    ],
+    "type": "alligator_dense",
+    "ground_truth_valid": true,
+    "notes": "Severe interconnected polygonal fatigue cracking mesh"
+  },
+  {
+    "id": "det_007",
+    "image": "road_crack_alligator_mild.jpg",
+    "class_name": "alligator cracking",
+    "confidence": 0.86,
+    "bbox": [
+      150,
+      120,
+      320,
+      250
+    ],
+    "type": "alligator_mild",
+    "ground_truth_valid": true,
+    "notes": "Early-stage spiderweb cracking pattern with hairline fissures"
+  },
+  {
+    "id": "det_008",
+    "image": "road_crack_edge.jpg",
+    "class_name": "edge crack",
+    "confidence": 0.87,
+    "bbox": [
+      320,
+      80,
+      420,
+      290
+    ],
+    "type": "crack_edge",
+    "ground_truth_valid": true,
+    "notes": "Structural failure along unsupported outer road shoulder"
+  },
+  {
+    "id": "det_009",
+    "image": "road_crack_block.jpg",
+    "class_name": "block cracking",
+    "confidence": 0.85,
+    "bbox": [
+      140,
+      90,
+      340,
+      260
+    ],
+    "type": "crack_block",
+    "ground_truth_valid": true,
+    "notes": "Interconnected rectangular block cracking in aged binder"
+  },
+  {
+    "id": "det_010",
+    "image": "road_rutting_depression.jpg",
+    "class_name": "rutting",
+    "confidence": 0.83,
+    "bbox": [
+      180,
+      70,
+      300,
+      300
+    ],
+    "type": "rutting",
+    "ground_truth_valid": true,
+    "notes": "Longitudinal surface depression along vehicular wheel track"
+  },
+  {
+    "id": "det_011",
+    "image": "road_raveling_aggregate.jpg",
+    "class_name": "raveling",
+    "confidence": 0.84,
+    "bbox": [
+      150,
+      110,
+      330,
+      250
+    ],
+    "type": "raveling",
+    "ground_truth_valid": true,
+    "notes": "Progressive aggregate loss and surface pitting erosion"
+  },
+  {
+    "id": "det_012",
+    "image": "road_concrete_joint_spall.jpg",
+    "class_name": "joint spall",
+    "confidence": 0.88,
+    "bbox": [
+      120,
+      160,
+      360,
+      220
+    ],
+    "type": "joint_spall",
+    "ground_truth_valid": true,
+    "notes": "Severe chipping and spalling along concrete slab joint"
+  },
+  {
+    "id": "det_013",
+    "image": "road_shadow_tree_fp.jpg",
+    "class_name": "crack",
+    "confidence": 0.81,
+    "bbox": [
+      140,
+      90,
+      340,
+      270
+    ],
+    "type": "shadow_tree",
+    "ground_truth_valid": false,
+    "notes": "Overhanging tree branch shadow (False Positive)"
+  },
+  {
+    "id": "det_014",
+    "image": "road_shadow_pole_fp.jpg",
+    "class_name": "longitudinal crack",
+    "confidence": 0.79,
+    "bbox": [
+      210,
+      50,
+      260,
+      310
+    ],
+    "type": "shadow_pole",
+    "ground_truth_valid": false,
+    "notes": "Linear shadow cast by roadside utility pole (False Positive)"
+  },
+  {
+    "id": "det_015",
+    "image": "road_tar_sealant_fp.jpg",
+    "class_name": "crack",
+    "confidence": 0.87,
+    "bbox": [
+      150,
+      80,
+      320,
+      280
+    ],
+    "type": "tar_sealant",
+    "ground_truth_valid": false,
+    "notes": "Bituminous rubber crack sealant repair (False Positive)"
+  },
+  {
+    "id": "det_016",
+    "image": "road_tar_patch_fp.jpg",
+    "class_name": "pothole",
+    "confidence": 0.82,
+    "bbox": [
+      160,
+      120,
+      320,
+      250
+    ],
+    "type": "tar_patch",
+    "ground_truth_valid": false,
+    "notes": "Smooth rectangular slurry seal asphalt maintenance patch (False Positive)"
+  },
+  {
+    "id": "det_017",
+    "image": "road_manhole_cover_fp.jpg",
+    "class_name": "pothole",
+    "confidence": 0.85,
+    "bbox": [
+      160,
+      110,
+      310,
+      260
+    ],
+    "type": "manhole_cover",
+    "ground_truth_valid": false,
+    "notes": "Cast iron circular sewer manhole casting (False Positive)"
+  },
+  {
+    "id": "det_018",
+    "image": "road_drainage_grate_fp.jpg",
+    "class_name": "pothole",
+    "confidence": 0.78,
+    "bbox": [
+      170,
+      130,
+      320,
+      240
+    ],
+    "type": "drainage_grate",
+    "ground_truth_valid": false,
+    "notes": "Slotted steel stormwater inlet grate (False Positive)"
+  },
+  {
+    "id": "det_019",
+    "image": "road_oil_spill_fp.jpg",
+    "class_name": "pothole",
+    "confidence": 0.74,
+    "bbox": [
+      180,
+      130,
+      290,
+      230
+    ],
+    "type": "oil_stain",
+    "ground_truth_valid": false,
+    "notes": "Flat vehicle engine oil fluid surface stain (False Positive)"
+  },
+  {
+    "id": "det_020",
+    "image": "road_water_puddle_fp.jpg",
+    "class_name": "pothole",
+    "confidence": 0.8,
+    "bbox": [
+      160,
+      120,
+      310,
+      240
+    ],
+    "type": "water_puddle",
+    "ground_truth_valid": false,
+    "notes": "Reflective wet rainwater surface puddle (False Positive)"
+  },
+  {
+    "id": "det_021",
+    "image": "road_paint_marking_fp.jpg",
+    "class_name": "crack",
+    "confidence": 0.77,
+    "bbox": [
+      190,
+      70,
+      260,
+      300
+    ],
+    "type": "paint_marking",
+    "ground_truth_valid": false,
+    "notes": "Weathered dashed thermoplastic road lane marking (False Positive)"
+  },
+  {
+    "id": "det_022",
+    "image": "road_tire_skid_fp.jpg",
+    "class_name": "longitudinal crack",
+    "confidence": 0.79,
+    "bbox": [
+      200,
+      60,
+      270,
+      310
+    ],
+    "type": "tire_skid",
+    "ground_truth_valid": false,
+    "notes": "Black rubber vehicle deceleration skid burn mark (False Positive)"
+  },
+  {
+    "id": "det_023",
+    "image": "road_expansion_joint_fp.jpg",
+    "class_name": "transverse crack",
+    "confidence": 0.82,
+    "bbox": [
+      90,
+      170,
+      390,
+      210
+    ],
+    "type": "expansion_joint",
+    "ground_truth_valid": false,
+    "notes": "Engineered steel neoprene expansion joint (False Positive)"
+  },
+  {
+    "id": "det_024",
+    "image": "road_leaves_debris_fp.jpg",
+    "class_name": "alligator cracking",
+    "confidence": 0.75,
+    "bbox": [
+      150,
+      120,
+      320,
+      250
+    ],
+    "type": "leaves_debris",
+    "ground_truth_valid": false,
+    "notes": "Scattered organic fallen leaves and twigs on shoulder (False Positive)"
+  }
+]

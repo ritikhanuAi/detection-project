@@ -1,0 +1,63 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Dashboard | RoadAthena AI{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: var(--space-8);">
+  <h1 style="font-size: var(--text-3xl); font-weight: 800; letter-spacing: -0.025em; margin-bottom: var(--space-2);">
+    Two-Stage Road Intelligence & AI Verification
+  </h1>
+  <p style="color: var(--theme-text-secondary); max-width: 720px;">
+    Autonomous road profiling and computer vision detection verification powered by local Vision-Language Models.
+  </p>
+</div>
+
+<!-- Stage Action Cards -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: var(--space-6); margin-bottom: var(--space-8);">
+  <!-- Stage 1 Card -->
+  <div class="card" style="border-top: 4px solid var(--theme-accent-primary);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4);">
+      <div>
+        <span class="badge badge-neutral" style="margin-bottom: var(--space-2);">Stage 1</span>
+        <h2 class="card-title">AI Road Profiler</h2>
+      </div>
+      <span style="font-size: 2rem;">📹</span>
+    </div>
+    <p style="color: var(--theme-text-secondary); font-size: var(--text-sm); margin-bottom: var(--space-6);">
+      Ingest inspection video, extract motion-stabilized keyframes, and identify road type, pavement, carriageway, lanes, and estimated width to select model parameters.
+    </p>
+    <a href="/stage1/" class="btn btn-primary" style="width: 100%;">Launch Road Profiler &rarr;</a>
+  </div>
+
+  <!-- Stage 2 Card -->
+  <div class="card" style="border-top: 4px solid var(--theme-correct);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4);">
+      <div>
+        <span class="badge badge-neutral" style="margin-bottom: var(--space-2);">Stage 2</span>
+        <h2 class="card-title">AI Detection Validator</h2>
+      </div>
+      <span style="font-size: 2rem;">🔍</span>
+    </div>
+    <p style="color: var(--theme-text-secondary); font-size: var(--text-sm); margin-bottom: var(--space-6);">
+      Audit detector bounding boxes against raw image crops. Flag false positives (shadows, tar sealant, utility covers) and generate verified JSON with reasoning.
+    </p>
+    <a href="/stage2/" class="btn btn-primary" style="width: 100%;">Launch Detection Validator &rarr;</a>
+  </div>
+</div>
+
+<!-- Recent Jobs Table Card -->
+<div class="card">
+  <div class="card-header">
+    <div>
+      <h3 class="card-title">Recent Inspection Jobs</h3>
+      <p class="card-subtitle">Real-time status of asynchronous video processing and validation pipelines</p>
+    </div>
+    <button class="btn btn-secondary" id="refreshJobsBtn">🔄 Refresh</button>
+  </div>
+  <div id="jobsTableContainer"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/static/js/pages/dashboard.js"></script>
+{% endblock %}
