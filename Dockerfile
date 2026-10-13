@@ -5,12 +5,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies (OpenCV headless & video support, netcat, curl)
+# Install system dependencies (OpenCV headless & video support, netcat, curl, gosu)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     netcat-traditional \
     libglib2.0-0 \
     ffmpeg \
+    gosu \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -25,10 +26,8 @@ COPY . /app/
 # Ensure media and static storage directories exist and entrypoint is executable
 RUN mkdir -p /app/media /app/staticfiles && \
     chmod +x /app/scripts/docker-entrypoint.sh && \
-    useradd -m -u 10001 -s /bin/bash athena && \
+    useradd -m -u 1000 -s /bin/bash athena && \
     chown -R athena:athena /app
-
-USER athena
 
 EXPOSE 8000
 

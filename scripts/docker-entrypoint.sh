@@ -3,6 +3,11 @@ set -e
 
 echo "=== RoadAthena AI Container Starting ==="
 
+# Fix permissions on mounted volumes for non-root user athena
+mkdir -p /app/media /app/staticfiles
+chown -R athena:athena /app/media /app/staticfiles 2>/dev/null || true
+chmod -R 775 /app/media /app/staticfiles 2>/dev/null || true
+
 wait_for_tcp() {
   local host="$1"
   local port="$2"
@@ -36,10 +41,10 @@ fi
 # Run Django migrations and static assets collection on web service start
 if [[ "$1" == "gunicorn"* ]] || [[ "$1" == "python" && "$2" == "manage.py" && "$3" == "runserver"* ]]; then
   echo "Applying database schema migrations..."
-  python manage.py migrate --noinput
+  gosu athena python manage.py migrate --noinput
 
   echo "Collecting static assets..."
-  python manage.py collectstatic --noinput || true
+  gosu athena python manage.py collectstatic --noinput || true
 fi
 
 # For Celery worker, add a 5-second grace delay to allow migrations to complete
@@ -48,5 +53,5 @@ if [[ "$1" == "celery"* ]]; then
   sleep 5
 fi
 
-echo "Executing container command: $@"
-exec "$@"
+echo "Executing container command as athena: $@"
+exec gosu athena "$@"
