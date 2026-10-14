@@ -16,29 +16,41 @@
   <link rel="stylesheet" href="/static/css/pages.css">
   {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
   <!-- Minimalist Header & Navigation -->
   <header class="app-header">
     <div class="nav-container">
       <a href="/" class="brand-wrap">
-        <span style="font-size: 1.4rem;">🛣️</span>
+        <svg class="icon icon-md" style="color: var(--theme-accent-secondary); width: 1.5rem; height: 1.5rem;" viewBox="0 0 24 24">
+          <path d="M4 19L9 5M20 19L15 5M12 5V9M12 13V15M12 19V20"/>
+        </svg>
         <span class="brand-logo">RoadAthena AI</span>
       </a>
       <nav class="nav-links">
-        <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Dashboard</a>
-        <a href="/stage1/" class="nav-link {% if '/stage1' in request.path %}active{% endif %}">Stage 1: Road Profiler</a>
-        <a href="/stage2/" class="nav-link {% if '/stage2' in request.path %}active{% endif %}">Stage 2: Detection Validator</a>
+        <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <a href="/video-analysis/" class="nav-link {% if '/video-analysis' in request.path or '/stage1' in request.path or '/dashboard' in request.path %}active{% endif %}">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M15 10l5-3v10l-5-3v-4z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg>
+          Video Analysis
+        </a>
+        <a href="/json-analysis/" class="nav-link {% if '/json-analysis' in request.path or '/stage2' in request.path %}active{% endif %}">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          JSON Analysis
+        </a>
       </nav>
       <div style="display: flex; align-items: center; gap: 8px;">
         <span class="badge badge-neutral" style="font-family: var(--font-mono); font-size: 0.75rem;">
-          CPU: Qwen2.5-VL / Gemini
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+          CPU: {{ SYSTEM_VLM_MODEL|default:'Qwen2.5-VL' }}
         </span>
       </div>
     </div>
   </header>
 
   <!-- Main Container -->
-  <main class="app-container">
+  <main class="{% block main_class %}app-container{% endblock %}">
     {% block content %}{% endblock %}
   </main>
 

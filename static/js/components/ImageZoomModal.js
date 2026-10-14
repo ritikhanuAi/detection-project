@@ -24,7 +24,7 @@ export class ImageZoomModal {
         </div>
         <div class="zoom-container">
           <img class="zoom-image-main" id="zoomModalImg" src="" alt="Defect Visual Inspection" />
-          <div style="width: 100%; background: #090d16; border: 1px solid var(--theme-border); padding: 12px; border-radius: 6px;">
+          <div style="width: 100%; background: var(--theme-surface-subtle); border: 1px solid var(--theme-border); padding: 12px; border-radius: 6px;">
             <span style="font-weight: 600; font-size: 0.8rem; text-transform: uppercase; color: var(--theme-text-muted);">AI Verification Reason:</span>
             <p style="font-size: 0.9rem; margin-top: 4px; color: var(--theme-text-primary);" id="zoomModalReason"></p>
           </div>

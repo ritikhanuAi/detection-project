@@ -3,7 +3,6 @@ import os
 import time
 import logging
 from collections import Counter
-from statistics import median
 from typing import List, Dict, Any, Tuple, Optional
 import cv2
 import numpy as np
@@ -260,18 +259,27 @@ def aggregate_road_profile_consensus(
     # Road geometry metric sanity check
     # Single lane physical bounds: 2.5m - 4.5m; standard default 3.4m
     standard_lane_width = 3.6 if final_road_type == 'Highway' else 3.2
-    expected_width = final_lanes * standard_lane_width
-    raw_median_width = median(widths) if widths else expected_width
+    expected_width = round(final_lanes * standard_lane_width, 1)
+
+    # Road width mode aggregation
+    rounded_widths = [round(float(w), 1) for w in widths] if widths else []
+    if rounded_widths:
+        width_counts = Counter(rounded_widths)
+        raw_mode_width = width_counts.most_common(1)[0][0]
+        mode_agreement = width_counts[raw_mode_width] / len(rounded_widths)
+    else:
+        raw_mode_width = expected_width
+        mode_agreement = 0.5
 
     # Plausibility check: clamp single lane width between 2.5m and 4.5m
-    inferred_lane_width = raw_median_width / max(final_lanes, 1)
+    inferred_lane_width = raw_mode_width / max(final_lanes, 1)
     if inferred_lane_width < 2.5 or inferred_lane_width > 4.5:
         # Blend towards expected lane-count geometry
-        final_width = round((raw_median_width * 0.3) + (expected_width * 0.7), 1)
-        conf_wd = 0.65
+        final_width = round((raw_mode_width * 0.3) + (expected_width * 0.7), 1)
+        conf_wd = round(min(mode_agreement, 0.65), 2)
     else:
-        final_width = round(raw_median_width, 1)
-        conf_wd = 0.88
+        final_width = round(raw_mode_width, 1)
+        conf_wd = round(max(mode_agreement, 0.75), 2)
 
     conf_scores = {
         'road_type': conf_rt,
@@ -286,6 +294,7 @@ def aggregate_road_profile_consensus(
         'pavement_type': votes_pt,
         'carriageway_type': votes_cw,
         'lanes': dict(Counter(lanes_list)),
+        'estimated_width_m': dict(Counter(rounded_widths)) if rounded_widths else {},
     }
 
     overall_conf = round(float(np.mean(list(conf_scores.values()))), 2)

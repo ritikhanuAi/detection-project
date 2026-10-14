@@ -7,13 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const refreshBtn = document.getElementById('refreshJobsBtn');
 
   async function loadJobs() {
-    container.innerHTML = '<p style="padding: 24px; text-align: center; color: var(--theme-text-muted);">Loading recent jobs...</p>';
+    if (!container) return;
+    container.innerHTML = '<p style="padding: 24px; text-align: center; color: var(--theme-text-muted);">Loading recent video analysis jobs...</p>';
     try {
-      const data = await jobsApi.listJobs({ page_size: 10 });
+      const data = await jobsApi.listJobs({ stage: 'stage1', page_size: 10 });
       const jobs = data.results || [];
 
       if (jobs.length === 0) {
-        container.innerHTML = '<p style="padding: 24px; text-align: center; color: var(--theme-text-muted);">No inspection jobs found. Launch Stage 1 or Stage 2 above.</p>';
+        container.innerHTML = '<p style="padding: 24px; text-align: center; color: var(--theme-text-muted);">No video analysis jobs found. Upload a video above to begin.</p>';
         return;
       }
 
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <thead>
               <tr>
                 <th>Job ID</th>
-                <th>Stage</th>
+                <th>Analysis Type</th>
                 <th>Status</th>
                 <th>Progress</th>
                 <th>Created At</th>
@@ -33,23 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
             <tbody>
               ${jobs.map(job => `
                 <tr>
-                  <td><code style="font-family: var(--font-mono); font-size: 0.75rem;">${job.id.substring(0, 8)}...</code></td>
-                  <td><strong>${job.stage === 'stage1' ? 'Stage 1: Profiler' : 'Stage 2: Validator'}</strong></td>
+                  <td><code style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--theme-accent-primary); font-weight: 600;">${job.id.substring(0, 8)}...</code></td>
+                  <td><strong>Video Analysis</strong></td>
                   <td>${renderStatusBadge(job.status)}</td>
                   <td>
                     <div style="display: flex; align-items: center; gap: 8px;">
                       <div class="confidence-bar" style="width: 80px;">
                         <div class="confidence-bar-fill" style="width: ${job.progress_percent}%;"></div>
                       </div>
-                      <span style="font-size: 0.75rem;">${job.progress_percent}%</span>
+                      <span style="font-size: 0.75rem; font-family: var(--font-mono);">${job.progress_percent}%</span>
                     </div>
                   </td>
                   <td style="color: var(--theme-text-muted); font-size: 0.8rem;">${new Date(job.created_at).toLocaleString()}</td>
                   <td>
-                    ${job.stage === 'stage1' 
-                      ? `<a href="/stage1/?job_id=${job.id}" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.75rem;">Inspect &rarr;</a>`
-                      : `<a href="/stage2/?job_id=${job.id}" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.75rem;">Inspect &rarr;</a>`
-                    }
+                    <a href="/video-analysis/?job_id=${job.id}" class="btn btn-secondary" style="padding: 3px 10px; font-size: 0.75rem; gap: 4px;">
+                      <span>Inspect</span>
+                      <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
                   </td>
                 </tr>
               `).join('')}
@@ -62,10 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  refreshBtn.addEventListener('click', () => {
-    loadJobs();
-    Toast.success('Jobs refreshed');
-  });
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
+      loadJobs();
+      Toast.success('Video analysis jobs refreshed');
+    });
+  }
 
   loadJobs();
 });

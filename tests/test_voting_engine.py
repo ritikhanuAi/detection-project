@@ -46,6 +46,21 @@ def test_aggregate_consensus_success():
     assert 'votes' in res
 
 
+def test_aggregate_consensus_road_width_mode():
+    # Widths where mode is distinct from median:
+    # [6.8, 6.8, 7.5, 8.0, 8.5] -> Median would be 7.5, Mode is 6.8
+    analyses = [
+        {'road_type': 'Urban', 'pavement_type': 'Asphalt', 'carriageway_type': 'Undivided', 'lanes': 2, 'estimated_width_m': 6.8, 'valid': True},
+        {'road_type': 'Urban', 'pavement_type': 'Asphalt', 'carriageway_type': 'Undivided', 'lanes': 2, 'estimated_width_m': 6.8, 'valid': True},
+        {'road_type': 'Urban', 'pavement_type': 'Asphalt', 'carriageway_type': 'Undivided', 'lanes': 2, 'estimated_width_m': 7.5, 'valid': True},
+        {'road_type': 'Urban', 'pavement_type': 'Asphalt', 'carriageway_type': 'Undivided', 'lanes': 2, 'estimated_width_m': 8.0, 'valid': True},
+        {'road_type': 'Urban', 'pavement_type': 'Asphalt', 'carriageway_type': 'Undivided', 'lanes': 2, 'estimated_width_m': 8.5, 'valid': True},
+    ]
+    res = aggregate_road_profile_consensus(analyses, total_frames=5)
+    assert res['estimated_width_m'] == 6.8
+    assert res['votes']['estimated_width_m'][6.8] == 2
+
+
 def test_aggregate_consensus_raises_on_zero_valid():
     analyses = [
         {'road_type': None, 'pavement_type': None, 'carriageway_type': None, 'lanes': None, 'estimated_width_m': None, 'valid': False},

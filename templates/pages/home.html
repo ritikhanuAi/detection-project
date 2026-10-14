@@ -1,0 +1,87 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home | RoadAthena AI{% endblock %}
+
+{% block body_class %}home-page{% endblock %}
+{% block main_class %}{% endblock %}
+
+{% block content %}
+<div class="home-viewport">
+  <div class="home-hero-wrap">
+    <div class="home-badge-pill">
+      <svg class="icon icon-sm" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      Road Athena AI Suite
+    </div>
+    <h1 class="home-hero-title">
+      Autonomous Road Pavement & Defect Intelligence
+    </h1>
+    <p class="home-hero-desc">
+      Integrated computer vision and local vision-language model verification engine designed for CPU infrastructure. Select an analysis workflow to begin.
+    </p>
+  </div>
+
+  <div class="home-cards-grid">
+    <!-- Video Analysis Card -->
+    <a href="/video-analysis/" class="action-card" id="homeVideoCard">
+      <div>
+        <div class="action-card-header">
+          <div class="action-card-icon-wrap">
+            <svg class="icon icon-lg" viewBox="0 0 24 24">
+              <path d="M15 10l5-3v10l-5-3v-4z"/>
+              <rect x="3" y="6" width="12" height="12" rx="2"/>
+            </svg>
+          </div>
+          <span class="badge badge-neutral" style="font-size: 0.7rem;">Survey Video</span>
+        </div>
+        <h2 class="action-card-title">Video Analysis</h2>
+        <p class="action-card-desc">
+          Upload road inspection video, extract motion-stabilized keyframes, and profile pavement, carriageway, lanes, and estimated width to configure detection models.
+        </p>
+      </div>
+      <div class="action-card-btn">
+        <span>Launch Video Analysis</span>
+        <svg class="icon icon-sm" viewBox="0 0 24 24">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- JSON Analysis Card -->
+    <a href="/json-analysis/" class="action-card" id="homeJsonCard">
+      <div>
+        <div class="action-card-header">
+          <div class="action-card-icon-wrap">
+            <svg class="icon icon-lg" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <span class="badge badge-neutral" style="font-size: 0.7rem;">BBox Verification</span>
+        </div>
+        <h2 class="action-card-title">JSON Analysis</h2>
+        <p class="action-card-desc">
+          Audit detector bounding boxes against raw image crops. Flag false positives (shadows, tar sealant, utility covers) and generate verified JSON with reasoning.
+        </p>
+      </div>
+      <div class="action-card-btn">
+        <span>Launch JSON Analysis</span>
+        <svg class="icon icon-sm" viewBox="0 0 24 24">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+
+  <div style="margin-top: var(--space-8); text-align: center;">
+    <span style="font-size: var(--text-xs); color: var(--theme-text-muted); font-family: var(--font-mono);">
+      {{ SYSTEM_FOOTER_INFO|default:'Local Offline CPU Inference &bull; Intel Core i5 &bull; Quantized Qwen2.5-VL' }}
+    </span>
+  </div>
+</div>
+{% endblock %}

@@ -12,10 +12,15 @@ urlpatterns = [
     path('api/profiling/', include('apps.profiling.urls', namespace='profiling')),
     path('api/validation/', include('apps.validation.urls', namespace='validation')),
 
-    # Frontend Web Views
-    path('', TemplateView.as_view(template_name='pages/index.html'), name='dashboard'),
-    path('stage1/', TemplateView.as_view(template_name='pages/stage1.html'), name='stage1'),
-    path('stage2/', TemplateView.as_view(template_name='pages/stage2.html'), name='stage2'),
+    # Frontend Web Views (Streamlined Nomenclature)
+    path('', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    path('video-analysis/', TemplateView.as_view(template_name='pages/video_analysis.html'), name='video_analysis'),
+    path('json-analysis/', TemplateView.as_view(template_name='pages/json_analysis.html'), name='json_analysis'),
+
+    # Compatibility Aliases
+    path('dashboard/', TemplateView.as_view(template_name='pages/video_analysis.html'), name='dashboard'),
+    path('stage1/', TemplateView.as_view(template_name='pages/video_analysis.html'), name='stage1'),
+    path('stage2/', TemplateView.as_view(template_name='pages/json_analysis.html'), name='stage2'),
 ]
 
 if settings.DEBUG:

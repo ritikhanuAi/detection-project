@@ -49,7 +49,7 @@ Below is the structured phase breakdown. Each phase has a clear objective, files
 
 - [x] **Frame Extraction Service:** OpenCV frame extractor with Laplacian blur variance rejection (`var >= 100.0`) and 768px downscaling (`apps/profiling/services.py`).
 - [x] **Profiling Prompt:** Strict JSON schema for road type, pavement, carriageway, lanes, and estimated width (`apps/ai_engine/prompts.py`).
-- [x] **Consensus Engine:** Majority voting for categories, mode for lanes, median for road width, and lane-width sanity check (`apps/profiling/services.py`).
+- [x] **Consensus Engine:** Majority voting for categories, mode for lanes, mode aggregation for road width, and lane-width sanity check (`apps/profiling/services.py`).
 - [x] **Model Config Matrix:** Selection rules table mapping profile to detector configurations.
 - [x] **Frontend UI:**
   - Video drag-and-drop upload zone with client-side XHR percentage tracking (`0%` ➔ `100%`).

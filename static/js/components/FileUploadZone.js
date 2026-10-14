@@ -24,7 +24,11 @@ export class FileUploadZone {
     this.el.innerHTML = `
       <div class="upload-zone" id="dropTarget">
         <input type="file" id="hiddenFileInput" style="display: none;" />
-        <div class="upload-icon">📁</div>
+        <div class="upload-icon">
+          <svg class="icon icon-xl" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+          </svg>
+        </div>
         <div style="font-weight: 600; font-size: 1rem;">Click or drag file to upload</div>
         <div class="upload-hint">Supported: ${this.options.allowedExtensions.join(', ')}</div>
         <div id="fileSelectedBadge" style="display: none; margin-top: 10px;">
